@@ -11,11 +11,11 @@ export class SearchService {
         @InjectModel(Product.name) private productModel: Model<Product>
     ) {}
 
-    async queryProducts(queryString: string,  pageNumber: number = 1, pageSize: number = 10) {
-        const filterModel = { $text: { $search: queryString } }
+    async queryProducts(queryString: string,  pageNumber: number = 0, pageSize: number = 2) {
+        const filterModel = { $text: { $search: queryString } };
         const skip = pageNumber * pageSize;
 
-        return this.productModel.find(filterModel).skip(skip).limit(pageSize);
+        return this.productModel.find(filterModel).skip(skip).limit(2);
     }
 
 }
